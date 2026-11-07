@@ -215,6 +215,24 @@
       transform: translateY(0) scale(1);
     }
 
+
+    /* Mobile-Specific Refinements */
+    @media (max-width: 640px) {
+      /* Prevent iOS Safari auto-zoom on input focus */
+      input[type="text"],
+      input[type="tel"],
+      input[type="email"],
+      select,
+      textarea {
+        font-size: 16px !important;
+      }
+
+      /* Compact padding for cards on small screens */
+      .mobile-compact-pad {
+        padding: 1.25rem !important;
+      }
+    }
+
     /* Mobile Sheet Drawer Animation */
     #mobile-drawer {
       transition: max-height 0.35s var(--ease-snappy), opacity 0.3s ease, transform 0.3s var(--ease-snappy);
@@ -414,6 +432,9 @@
       scrollbar-width: none;
       padding-bottom: 1rem;
       padding-top: 0.5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      scroll-padding: 0 1rem;
     }
     .testimonial-track::-webkit-scrollbar {
       display: none;
@@ -647,6 +668,10 @@
           <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
           CBSE Info
         </a>
+        <a href="#contact" class="mobile-nav-link flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-slate-100/80 transition">
+          <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Contact Us
+        </a>
       </nav>
       <div class="mt-4 pt-4 border-t border-slate-200/80 flex flex-col gap-2.5">
         <button type="button" onclick="openInquiryModal()" class="w-full py-3 rounded-xl text-center font-bold text-sm text-white bg-gradient-to-r from-brand-royal to-brand-navy shadow-sm transition">
@@ -698,21 +723,21 @@
             </a>
           </div>
 
-          <!-- Quick Badges with Number Animations -->
-          <div class="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-white/15 text-left">
-            <div>
+          <!-- Quick Badges with Number Animations (Mobile Frosted Glass Cards) -->
+          <div class="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 border-t border-white/15 text-center sm:text-left">
+            <div class="bg-white/5 sm:bg-transparent p-3 sm:p-0 rounded-2xl border border-white/10 sm:border-0 backdrop-blur-xs">
               <span class="block text-2xl font-extrabold text-white"><span class="stat-counter" data-target="12">0</span>+ Yrs</span>
               <span class="text-xs text-slate-300">Legacy of Trust</span>
             </div>
-            <div>
+            <div class="bg-white/5 sm:bg-transparent p-3 sm:p-0 rounded-2xl border border-white/10 sm:border-0 backdrop-blur-xs">
               <span class="block text-2xl font-extrabold text-brand-amber"><span class="stat-counter" data-target="100">0</span>%</span>
               <span class="text-xs text-slate-300">CBSE Results</span>
             </div>
-            <div>
+            <div class="bg-white/5 sm:bg-transparent p-3 sm:p-0 rounded-2xl border border-white/10 sm:border-0 backdrop-blur-xs">
               <span class="block text-2xl font-extrabold text-white"><span class="stat-counter" data-target="3">0</span> Labs</span>
               <span class="text-xs text-slate-300">Modern Sciences</span>
             </div>
-            <div>
+            <div class="bg-white/5 sm:bg-transparent p-3 sm:p-0 rounded-2xl border border-white/10 sm:border-0 backdrop-blur-xs">
               <span class="block text-2xl font-extrabold text-white"><span class="stat-counter" data-target="15">0</span>+</span>
               <span class="text-xs text-slate-300">Safe Bus Routes</span>
             </div>
@@ -798,12 +823,12 @@
             Admissions for 2025-26 Session open. Diagnostic skill assessment scheduled for new admissions.
           </p>
         </div>
-        <div class="flex items-center gap-3 text-xs font-bold">
-          <a href="https://pdpublicschool.co.in/wp-content/uploads/2025/09/CALENDER-2025-26.pdf" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-lg bg-white border border-amber-300 text-brand-navy hover:bg-amber-100 transition shadow-sm">
-            Download Academic Calendar (PDF)
+        <div class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-2 text-xs font-bold w-full md:w-auto">
+          <a href="https://pdpublicschool.co.in/wp-content/uploads/2025/09/CALENDER-2025-26.pdf" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial text-center px-3.5 py-2 rounded-lg bg-white border border-amber-300 text-brand-navy hover:bg-amber-100 transition shadow-xs">
+            Academic Calendar (PDF)
           </a>
-          <a href="#disclosures" class="px-3.5 py-1.5 rounded-lg bg-brand-navy text-white hover:bg-brand-royal transition shadow-sm">
-            CBSE Public Disclosures
+          <a href="#disclosures" class="flex-1 sm:flex-initial text-center px-3.5 py-2 rounded-lg bg-brand-navy text-white hover:bg-brand-royal transition shadow-xs">
+            CBSE Disclosures
           </a>
         </div>
       </div>
@@ -2158,7 +2183,122 @@
           <span class="text-xs text-slate-300">Registered Educational Society</span>
         </div>
         
-        <div class="overflow-x-auto">
+        <!-- MOBILE-OPTIMIZED CARDS VIEW (Phones) -->
+        <div class="sm:hidden divide-y divide-slate-100">
+          <div class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center">1</span>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">Sh. Anil Goyal</h4>
+                <span class="text-xs text-slate-500 block">Executive Head</span>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-blue-50 text-brand-royal font-semibold text-xs">President</span>
+          </div>
+          <div class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center">2</span>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">Sh. Sanjay Goyal</h4>
+                <span class="text-xs text-slate-500 block">Governance & Operations</span>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-blue-50 text-brand-royal font-semibold text-xs">Vice President</span>
+          </div>
+          <div class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center">3</span>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">Sh. Manoj Tayal</h4>
+                <span class="text-xs text-slate-500 block">Finance & Auditing</span>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-800 font-semibold text-xs">Cashier</span>
+          </div>
+          <div class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center">4</span>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">Sh. Yashpal Garg</h4>
+                <span class="text-xs text-slate-500 block">Academic Standards</span>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 font-semibold text-xs">Educationist</span>
+          </div>
+          <div class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center">5</span>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">Mrs. Jyoti Sharma</h4>
+                <span class="text-xs text-slate-500 block">Academic Leadership</span>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-amber-50 text-brand-gold font-semibold text-xs">Headmistress</span>
+          </div>
+          <div class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center">6</span>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">Mrs. Renu Rani</h4>
+                <span class="text-xs text-slate-500 block">Student Welfare</span>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-800 font-semibold text-xs">Member</span>
+          </div>
+          <div class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center">7</span>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">Sh. Sanjay Goyal</h4>
+                <span class="text-xs text-slate-500 block">Parent Advisory</span>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-semibold text-xs">Parent Rep</span>
+          </div>
+          <div class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center">8</span>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">Mrs. Jyoti</h4>
+                <span class="text-xs text-slate-500 block">Faculty Liaison</span>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-semibold text-xs">Teacher Rep</span>
+          </div>
+          <div class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center">9</span>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">Sh. Chagan Sharma</h4>
+                <span class="text-xs text-slate-500 block">Community Outreach</span>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-800 font-semibold text-xs">Member</span>
+          </div>
+          <div class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center">10</span>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">Sh. Neeraj Mehta</h4>
+                <span class="text-xs text-slate-500 block">Infrastructure Support</span>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-800 font-semibold text-xs">Member</span>
+          </div>
+          <div class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center">11</span>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">Sh. Tarkeshwar</h4>
+                <span class="text-xs text-slate-500 block">Social Affairs</span>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-800 font-semibold text-xs">Member</span>
+          </div>
+        </div>
+
+        <!-- FULL TABLE (Tablet & Desktop Only) -->
+        <div class="hidden sm:block overflow-x-auto">
           <table class="w-full text-left text-sm">
             <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
               <tr>
@@ -2455,7 +2595,7 @@
         </div>
 
         <!-- Direct Message Form -->
-        <div class="lg:col-span-7 bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+        <div class="lg:col-span-7 bg-white p-5 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
           <h3 class="text-xl font-bold text-brand-navy">Send an Instant Message</h3>
           <p class="text-xs sm:text-sm text-slate-500 mt-1 mb-6">Have questions regarding transport routes, booklists, or transfer certificates?</p>
 
@@ -2604,7 +2744,7 @@
   <!-- ========================================== -->
   <!-- 17. FULL-SCREEN IMAGE LIGHTBOX MODAL       -->
   <!-- ========================================== -->
-  <div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4 modal-backdrop">
+  <div id="lightbox-modal" class="fixed inset-0 z-[70] hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4 modal-backdrop">
     <div class="relative max-w-4xl w-full text-center modal-content-box px-4 sm:px-12">
       <!-- Close Button -->
       <button type="button" onclick="closeLightbox()" class="absolute -top-12 right-2 sm:right-0 text-white hover:text-amber-400 p-2 touch-target transition" aria-label="Close Lightbox">
@@ -2632,7 +2772,7 @@
   <!-- ========================================== -->
   <!-- 18. POPUP ADMISSION INQUIRY MODAL         -->
   <!-- ========================================== -->
-  <div id="inquiry-modal" class="fixed inset-0 z-50 hidden bg-brand-navy/60 backdrop-blur-sm flex items-center justify-center p-4 modal-backdrop">
+  <div id="inquiry-modal" class="fixed inset-0 z-[70] hidden bg-brand-navy/60 backdrop-blur-sm flex items-center justify-center p-4 modal-backdrop">
     <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border border-slate-200 overflow-y-auto max-h-[90vh] modal-content-box">
       
       <!-- Close Button -->
@@ -2881,6 +3021,25 @@
         modal.classList.add('hidden');
         document.body.style.overflow = '';
       }, 250);
+    }
+
+    // Touch swipe gesture support for Lightbox on phones
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const lightboxEl = document.getElementById('lightbox-modal');
+    if (lightboxEl) {
+      lightboxEl.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      lightboxEl.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchEndX - touchStartX;
+        if (Math.abs(diff) > 45) {
+          if (diff < 0) nextLightboxPhoto();
+          else prevLightboxPhoto();
+        }
+      }, { passive: true });
     }
 
     document.getElementById('lightbox-modal').addEventListener('click', (e) => {
