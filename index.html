@@ -449,6 +449,72 @@
       background-color: var(--color-brand-royal);
     }
 
+
+    /* Modern Desktop Scrollbar */
+    @media (min-width: 1024px) {
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #F1F5F9;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #94A3B8;
+        border-radius: 9999px;
+        border: 2px solid #F1F5F9;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-brand-royal);
+      }
+    }
+
+    /* Desktop Active Nav Link (Scroll Spy) */
+    .nav-link.active {
+      color: var(--color-brand-royal) !important;
+      background-color: rgba(30, 77, 183, 0.08) !important;
+      font-weight: 700 !important;
+    }
+    .nav-link.active::after {
+      transform: translateX(-50%) scaleX(1) !important;
+      background: var(--color-brand-royal) !important;
+    }
+
+    /* Floating Back-to-Top Button */
+    #back-to-top-btn {
+      transition: opacity 0.3s var(--ease-snappy), transform 0.3s var(--ease-snappy), visibility 0.3s;
+    }
+    #back-to-top-btn.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(14px) scale(0.9);
+      pointer-events: none;
+    }
+    #back-to-top-btn.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    /* Desktop Testimonials Grab & Wheel Scroll */
+    .testimonial-track {
+      cursor: grab;
+    }
+    .testimonial-track:active {
+      cursor: grabbing;
+    }
+
+    /* Desktop Fee Table Row Accent */
+    .fee-desktop-table tbody tr {
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+    .fee-desktop-table tbody tr:hover {
+      background-color: rgba(248, 250, 252, 0.95);
+      border-left-color: var(--color-brand-royal);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, .animate-float, .animate-pulse-glow, .reveal, .modal-content-box, button:active, a.touch-target:active, .testimonial-card {
         animation: none !important;
@@ -1543,7 +1609,7 @@
           <!-- FULL DESKTOP TABLE (Tablet & Desktop Only)      -->
           <!-- ============================================== -->
           <div class="hidden sm:block overflow-x-auto">
-            <table class="w-full text-left text-sm">
+            <table class="w-full text-left text-sm fee-desktop-table">
               <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
                 <tr>
                   <th class="py-3 px-4 sm:px-6">Class</th>
@@ -2526,15 +2592,40 @@
   </div>
 
   <!-- ========================================== -->
+  <!-- 16.5 DESKTOP FLOATING BACK-TO-TOP BUTTON   -->
+  <!-- ========================================== -->
+  <button type="button" id="back-to-top-btn" onclick="scrollToTop()" class="hidden lg:flex is-hidden fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full bg-white/95 hover:bg-white text-brand-navy shadow-lg hover:shadow-2xl border border-slate-200/90 backdrop-blur-md items-center justify-center transition-all duration-300 group hover:-translate-y-1.5 active:scale-95 touch-target" aria-label="Scroll back to top">
+    <svg class="w-5 h-5 text-brand-navy group-hover:text-brand-royal transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+    </svg>
+    <span class="sr-only">Back to Top</span>
+  </button>
+
+  <!-- ========================================== -->
   <!-- 17. FULL-SCREEN IMAGE LIGHTBOX MODAL       -->
   <!-- ========================================== -->
   <div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4 modal-backdrop">
-    <div class="relative max-w-4xl w-full text-center modal-content-box">
-      <button type="button" onclick="closeLightbox()" class="absolute -top-12 right-0 text-white hover:text-amber-400 p-2 touch-target" aria-label="Close Lightbox">
+    <div class="relative max-w-4xl w-full text-center modal-content-box px-4 sm:px-12">
+      <!-- Close Button -->
+      <button type="button" onclick="closeLightbox()" class="absolute -top-12 right-2 sm:right-0 text-white hover:text-amber-400 p-2 touch-target transition" aria-label="Close Lightbox">
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
-      <img id="lightbox-img" src="" alt="Full view" class="max-h-[80vh] max-w-full mx-auto rounded-xl shadow-2xl object-contain">
-      <p id="lightbox-caption" class="text-white text-sm sm:text-base font-semibold mt-4 text-center"></p>
+
+      <!-- Previous Photo Button -->
+      <button type="button" onclick="prevLightboxPhoto(event)" class="absolute left-1 sm:-left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/15 hover:bg-white/30 text-white backdrop-blur-md border border-white/25 flex items-center justify-center transition shadow-lg touch-target" aria-label="Previous Photo">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+
+      <!-- Next Photo Button -->
+      <button type="button" onclick="nextLightboxPhoto(event)" class="absolute right-1 sm:-right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/15 hover:bg-white/30 text-white backdrop-blur-md border border-white/25 flex items-center justify-center transition shadow-lg touch-target" aria-label="Next Photo">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+      </button>
+
+      <img id="lightbox-img" src="" alt="Full view" class="max-h-[75vh] max-w-full mx-auto rounded-xl shadow-2xl object-contain">
+      <div class="mt-4 flex flex-col items-center">
+        <p id="lightbox-caption" class="text-white text-sm sm:text-base font-semibold text-center"></p>
+        <span id="lightbox-counter" class="text-xs font-medium text-slate-300 mt-1 bg-white/10 px-3 py-0.5 rounded-full"></span>
+      </div>
     </div>
   </div>
 
@@ -2721,18 +2812,66 @@
       }, 250);
     }
 
-    // Lightbox Controls with Fluid Animations
-    function openLightbox(src, caption) {
+    // Gallery Lightbox with Desktop Arrow Navigation & Index Tracking
+    let galleryData = [];
+    let currentGalleryIdx = 0;
+
+    function initGalleryData() {
+      const items = document.querySelectorAll('#gallery-grid .gallery-item');
+      galleryData = [];
+      items.forEach((item, idx) => {
+        const img = item.querySelector('img');
+        const cap = item.querySelector('h4')?.innerText || item.querySelector('span')?.innerText || 'Campus Photo';
+        if (img) {
+          galleryData.push({ src: img.src, caption: cap });
+          item.setAttribute('onclick', `openLightboxByIndex(${idx})`);
+        }
+      });
+    }
+
+    function openLightboxByIndex(idx) {
+      if (!galleryData.length) initGalleryData();
+      if (idx < 0) idx = galleryData.length - 1;
+      if (idx >= galleryData.length) idx = 0;
+      currentGalleryIdx = idx;
+
+      const item = galleryData[idx];
+      if (!item) return;
+
       const modal = document.getElementById('lightbox-modal');
       const img = document.getElementById('lightbox-img');
       const cap = document.getElementById('lightbox-caption');
-      img.src = src;
-      cap.innerText = caption;
+      const counter = document.getElementById('lightbox-counter');
+
+      img.src = item.src;
+      cap.innerText = item.caption;
+      if (counter) counter.innerText = `${idx + 1} of ${galleryData.length}`;
+
       modal.classList.remove('hidden');
       requestAnimationFrame(() => {
         modal.classList.add('is-open');
       });
       document.body.style.overflow = 'hidden';
+    }
+
+    function openLightbox(src, caption) {
+      if (!galleryData.length) initGalleryData();
+      const foundIdx = galleryData.findIndex(item => item.src === src);
+      if (foundIdx !== -1) {
+        openLightboxByIndex(foundIdx);
+      } else {
+        openLightboxByIndex(0);
+      }
+    }
+
+    function nextLightboxPhoto(e) {
+      if (e) e.stopPropagation();
+      openLightboxByIndex(currentGalleryIdx + 1);
+    }
+
+    function prevLightboxPhoto(e) {
+      if (e) e.stopPropagation();
+      openLightboxByIndex(currentGalleryIdx - 1);
     }
 
     function closeLightbox() {
@@ -2752,13 +2891,57 @@
       if (e.target.id === 'inquiry-modal') closeInquiryModal();
     });
 
-    // Close on escape key
+    // Keyboard navigation (Escape, ArrowLeft, ArrowRight)
     window.addEventListener('keydown', (e) => {
+      const lightboxModal = document.getElementById('lightbox-modal');
+      const isLightboxOpen = lightboxModal && !lightboxModal.classList.contains('hidden');
+
       if (e.key === 'Escape') {
         closeInquiryModal();
         closeLightbox();
+      } else if (isLightboxOpen) {
+        if (e.key === 'ArrowRight') nextLightboxPhoto();
+        if (e.key === 'ArrowLeft') prevLightboxPhoto();
       }
     });
+
+    // Back to top helper
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Desktop Back to Top visibility on scroll
+    const bttBtn = document.getElementById('back-to-top-btn');
+    window.addEventListener('scroll', () => {
+      if (bttBtn) {
+        if (window.scrollY > 400) {
+          bttBtn.classList.remove('is-hidden');
+          bttBtn.classList.add('is-visible');
+        } else {
+          bttBtn.classList.add('is-hidden');
+          bttBtn.classList.remove('is-visible');
+        }
+      }
+    }, { passive: true });
+
+    // Desktop Navigation Active Link Scroll-Spy
+    const desktopNavLinks = document.querySelectorAll('header nav a.nav-link');
+    const trackedSections = document.querySelectorAll('section[id]');
+
+    function updateDesktopNavSpy() {
+      const scrollPos = window.scrollY + 130;
+      trackedSections.forEach(sec => {
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
+        if (scrollPos >= top && scrollPos < top + height) {
+          desktopNavLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }
+    window.addEventListener('scroll', updateDesktopNavSpy, { passive: true });
 
     // Gallery Category Filtering
     function filterGallery(category, clickedBtn) {
@@ -2910,6 +3093,8 @@
       document.addEventListener('DOMContentLoaded', initStatCounters);
     } else {
       initStatCounters();
+      initGalleryData();
+      updateDesktopNavSpy();
     }
 
     // Interactive Testimonial Carousel Controller
@@ -2940,6 +3125,13 @@
 
     if (track) {
       track.addEventListener('scroll', updateTestimonialDots, { passive: true });
+      
+      // Desktop horizontal mouse wheel scroll
+      track.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && Math.abs(e.deltaY) > 4) {
+          track.scrollLeft += e.deltaY * 0.9;
+        }
+      }, { passive: true });
       
       // Gentle auto-scroll hint every 5 seconds if user is idle
       let autoScrollTimer = setInterval(() => {
