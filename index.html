@@ -404,8 +404,53 @@
       transform: scale(1) translateY(0);
     }
 
+    /* Testimonials Carousel & Snap Slider */
+    .testimonial-track {
+      display: flex;
+      gap: 1.25rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 1rem;
+      padding-top: 0.5rem;
+    }
+    .testimonial-track::-webkit-scrollbar {
+      display: none;
+    }
+    .testimonial-card {
+      flex: 0 0 88%;
+      scroll-snap-align: center;
+      transition: transform 0.3s var(--ease-snappy), box-shadow 0.3s var(--ease-snappy);
+    }
+    @media (min-width: 640px) {
+      .testimonial-card {
+        flex: 0 0 calc(50% - 0.75rem);
+      }
+    }
+    @media (min-width: 1024px) {
+      .testimonial-card {
+        flex: 0 0 calc(33.333% - 0.85rem);
+      }
+    }
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+    }
+    .dot-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 9999px;
+      background-color: #CBD5E1;
+      cursor: pointer;
+      transition: all 0.25s var(--ease-snappy);
+    }
+    .dot-indicator.active {
+      width: 24px;
+      background-color: var(--color-brand-royal);
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      *, .animate-float, .animate-pulse-glow, .reveal, .modal-content-box, button:active, a.touch-target:active {
+      *, .animate-float, .animate-pulse-glow, .reveal, .modal-content-box, button:active, a.touch-target:active, .testimonial-card {
         animation: none !important;
         transition: none !important;
         transform: none !important;
@@ -469,6 +514,7 @@
         <a href="#admissions" class="nav-link">Admissions</a>
         <a href="#fees" class="nav-link">Fee Structure</a>
         <a href="#facilities" class="nav-link">Facilities</a>
+        <a href="#testimonials" class="nav-link">Reviews</a>
         <a href="#gallery" class="nav-link">Gallery</a>
         <a href="#disclosures" class="nav-link">CBSE Disclosures</a>
         <a href="#contact" class="nav-link">Contact</a>
@@ -522,6 +568,10 @@
         <a href="#facilities" class="mobile-nav-link flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-slate-100/80 transition">
           <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
           Facilities
+        </a>
+        <a href="#testimonials" class="mobile-nav-link flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-slate-100/80 transition">
+          <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+          Reviews
         </a>
         <a href="#gallery" class="mobile-nav-link flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-slate-100/80 transition">
           <svg class="w-4 h-4 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
@@ -1693,6 +1743,150 @@
     </section>
 
     <!-- ========================================== -->
+    <!-- 10.5 TESTIMONIALS & REVIEWS SECTION       -->
+    <!-- ========================================== -->
+    <section id="testimonials" class="py-20 bg-gradient-to-b from-slate-50 via-white to-slate-50 border-t border-slate-200/80 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+          <div>
+            <span class="text-xs font-bold text-brand-royal uppercase tracking-widest">Voices of Trust</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy mt-2">What Parents & Students Say</h2>
+            <div class="w-16 h-1 bg-brand-royal mt-4 rounded-full"></div>
+            <p class="text-slate-600 mt-3 text-sm sm:text-base max-w-xl">
+              Hear directly from our school families about academic discipline, caring faculty, and student growth at P.D. Public School.
+            </p>
+          </div>
+
+          <!-- Carousel Controls -->
+          <div class="flex items-center gap-2 mt-6 md:mt-0">
+            <button type="button" onclick="scrollTestimonials(-1)" class="w-10 h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-brand-navy shadow-xs flex items-center justify-center transition touch-target" aria-label="Previous Review">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button type="button" onclick="scrollTestimonials(1)" class="w-10 h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-brand-navy shadow-xs flex items-center justify-center transition touch-target" aria-label="Next Review">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Animated Swipeable Cards Track -->
+        <div class="testimonial-track" id="testimonial-track">
+          
+          <!-- Review 1: Lalita Aggarwal (Parent) -->
+          <div class="testimonial-card bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 text-brand-amber mb-4">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+              <p class="text-slate-700 text-sm leading-relaxed italic">
+                "I am amazed by the positive changes in my child since they started at P.D. Public School. They are much more confident, curious, and eager to learn every morning. The teachers truly care!"
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-blue-100 text-brand-navy font-bold flex items-center justify-center text-sm">
+                LA
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">Lalita Aggarwal</h4>
+                <span class="text-xs text-slate-500">School Parent • Ferozepur Jhirka</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 2: Yash Bansal (Student Alumni) -->
+          <div class="testimonial-card bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 text-brand-amber mb-4">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+              <p class="text-slate-700 text-sm leading-relaxed italic">
+                "Seeing my personal growth, confidence, and board marks at P.D. Public School reassures me that this school shapes character. It's an environment where every student feels valued and inspired to excel."
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-800 font-bold flex items-center justify-center text-sm">
+                YB
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">Yash Bansal</h4>
+                <span class="text-xs text-slate-500">Student • CBSE Class XII</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 3: Himanshu Sharma (Senior Student) -->
+          <div class="testimonial-card bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 text-brand-amber mb-4">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+              <p class="text-slate-700 text-sm leading-relaxed italic">
+                "The modern computer and composite science labs gave us practical exposure beyond textbooks. Teachers are always available after classes to clear doubts and guide us for competitive exams."
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center text-sm">
+                HS
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">Himanshu Sharma</h4>
+                <span class="text-xs text-slate-500">Student • Science Stream</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 4: Sangeeta Devi (Parent) -->
+          <div class="testimonial-card bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 text-brand-amber mb-4">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+              <p class="text-slate-700 text-sm leading-relaxed italic">
+                "The safe GPS school bus facility and strict campus discipline give parents complete peace of mind. Both of my daughters study here and receive top guidance."
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-800 font-bold flex items-center justify-center text-sm">
+                SD
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">Sangeeta Devi</h4>
+                <span class="text-xs text-slate-500">Parent of 2 Students</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dot Indicators for Mobile -->
+        <div class="flex items-center justify-center gap-2 mt-6" id="testimonial-dots">
+          <span class="dot-indicator active" onclick="goToTestimonial(0)"></span>
+          <span class="dot-indicator" onclick="goToTestimonial(1)"></span>
+          <span class="dot-indicator" onclick="goToTestimonial(2)"></span>
+          <span class="dot-indicator" onclick="goToTestimonial(3)"></span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
     <!-- 11. COMPREHENSIVE CAMPUS PHOTO GALLERY    -->
     <!-- ========================================== -->
     <section id="gallery" class="py-20 bg-slate-100/60 border-y border-slate-200">
@@ -2716,6 +2910,51 @@
       document.addEventListener('DOMContentLoaded', initStatCounters);
     } else {
       initStatCounters();
+    }
+
+    // Interactive Testimonial Carousel Controller
+    const track = document.getElementById('testimonial-track');
+    const dots = document.querySelectorAll('.dot-indicator');
+
+    function updateTestimonialDots() {
+      if (!track || !dots.length) return;
+      const scrollLeft = track.scrollLeft;
+      const cardWidth = track.querySelector('.testimonial-card')?.offsetWidth || 300;
+      const activeIdx = Math.round(scrollLeft / (cardWidth + 20));
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === activeIdx);
+      });
+    }
+
+    function scrollTestimonials(direction) {
+      if (!track) return;
+      const cardWidth = track.querySelector('.testimonial-card')?.offsetWidth || 320;
+      track.scrollBy({ left: direction * (cardWidth + 20), behavior: 'smooth' });
+    }
+
+    function goToTestimonial(index) {
+      if (!track) return;
+      const cardWidth = track.querySelector('.testimonial-card')?.offsetWidth || 320;
+      track.scrollTo({ left: index * (cardWidth + 20), behavior: 'smooth' });
+    }
+
+    if (track) {
+      track.addEventListener('scroll', updateTestimonialDots, { passive: true });
+      
+      // Gentle auto-scroll hint every 5 seconds if user is idle
+      let autoScrollTimer = setInterval(() => {
+        if (!track) return;
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        if (track.scrollLeft >= maxScroll - 10) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          scrollTestimonials(1);
+        }
+      }, 5000);
+
+      // Pause auto-scroll on touch/hover
+      track.addEventListener('touchstart', () => clearInterval(autoScrollTimer), { passive: true });
+      track.addEventListener('mouseenter', () => clearInterval(autoScrollTimer));
     }
 
     // Dynamic animated Fee Calculator
